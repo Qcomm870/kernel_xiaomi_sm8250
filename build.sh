@@ -20,7 +20,7 @@ git log $LAST..HEAD > ../changelog.txt
 BRANCH=$(git branch --show-current)
 
 # Каталоги компиляторов
-CLANG_DIR=$KERNEL_DIR/clang20
+CLANG_DIR=$KERNEL_DIR/clang21
 ANDROID_PREBUILTS_GCC_ARM_DIR=$KERNEL_DIR/android_prebuilts_gcc_linux-x86_arm_arm-linux-androideabi-4.9
 ANDROID_PREBUILTS_GCC_AARCH64_DIR=$KERNEL_DIR/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9
 
@@ -44,14 +44,14 @@ check_and_wget() {
         mkdir $dir
         cd $dir
         wget $repo
-        tar -zxvf Clang-20.0.0git-20241222.tar.gz
-        rm -rf Clang-20.0.0git-20241222.tar.gz
+        tar -zxvf Clang-21.0.0git-20250322.tar.gz
+        rm -rf Clang-21.0.0git-20250322.tar.gz
         cd ../kernel_xiaomi_sm8250
     fi
 }
 
 # Клонирование инструментов компиляции, если они не существуют
-check_and_wget $CLANG_DIR https://github.com/ZyCromerZ/Clang/releases/download/20.0.0git-20241222-release/Clang-20.0.0git-20241222.tar.gz
+check_and_wget $CLANG_DIR https://github.com/ZyCromerZ/Clang/releases/download/21.0.0git-20250322-release/Clang-21.0.0git-20250322.tar.gz
 check_and_clone $ANDROID_PREBUILTS_GCC_ARM_DIR https://github.com/LineageOS/android_prebuilts_gcc_linux-x86_arm_arm-linux-androideabi-4.9
 check_and_clone $ANDROID_PREBUILTS_GCC_AARCH64_DIR https://github.com/LineageOS/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9
 

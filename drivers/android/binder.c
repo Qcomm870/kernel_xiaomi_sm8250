@@ -5363,7 +5363,11 @@ static int binder_open(struct inode *nodp, struct file *filp)
 	    (strncmp(proc->tsk->comm, "s.nexuslauncher",
 				strlen("s.nexuslauncher")) == 0) ||
 		(strncmp(proc->tsk->comm, "droid.launcher3",
-				strlen("droid.launcher3")) == 0))
+				strlen("droid.launcher3")) == 0) ||
+		(strncmp(proc->tsk->comm, "zygote",
+				strlen("zygote")) == 0) ||
+		(strncmp(proc->tsk->comm, "zygote64",
+				strlen("zygote64")) == 0))
 		proc->tsk->critical_rt_task = 1;
 #endif
 #ifdef CONFIG_SF_BINDER

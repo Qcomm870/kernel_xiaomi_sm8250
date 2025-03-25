@@ -61,7 +61,11 @@ export PATH
 export ARCH=arm64
 
 # Каталог для сборки MagicTime
-MAGIC_TIME_DIR="$KERNEL_DIR/MagicTime"
+if [ "$DEVICE" = "alioth" ]; then
+    MAGIC_TIME_DIR="$KERNEL_DIR/MagicTime"
+else
+    MAGIC_TIME_DIR="$KERNEL_DIR/MagicTime2"
+fi
 
 # Создание каталога MagicTime, если его нет
 if [ ! -d "$MAGIC_TIME_DIR" ]; then
@@ -92,7 +96,6 @@ export CROSS_COMPILE="aarch64-linux-gnu-"
 export CROSS_COMPILE_COMPAT="arm-linux-gnueabi-"
 export KBUILD_BUILD_USER="TIMISONG"
 export KBUILD_BUILD_HOST="timisong-dev"
-export MODEL="alioth"
 
 # Запись времени сборки
 MAGIC_BUILD_DATE=$(date '+%Y-%m-%d_%H-%M-%S')

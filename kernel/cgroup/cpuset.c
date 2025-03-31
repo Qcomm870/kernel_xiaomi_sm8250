@@ -3323,8 +3323,9 @@ void cpuset_cpus_allowed_mi(struct task_struct *tsk)
 void cpuset_cpus_allowed_fallback(struct task_struct *tsk)
 {
 	rcu_read_lock();
-	do_set_cpus_allowed(tsk, is_in_v2_mode() ?
-		task_cs(tsk)->cpus_allowed : cpu_possible_mask);
+	if(!(tsk->group_leader->critical_rt_task))
+		do_set_cpus_allowed(tsk, is_in_v2_mode() ?
+			task_cs(tsk)->cpus_allowed : cpu_possible_mask);
 	rcu_read_unlock();
 
 	/*

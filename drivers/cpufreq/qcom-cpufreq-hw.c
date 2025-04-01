@@ -147,9 +147,14 @@ static unsigned long limits_mitigation_notify(struct cpufreq_qcom *c,
 		freq = readl_relaxed(c->reg_bases[REG_DOMAIN_STATE]) &
 				GENMASK(7, 0);
 		freq = DIV_ROUND_CLOSEST_ULL(freq * c->xo_rate, 1000);
+
+		/* Convert limited freq to reduced capacity */
 		if (policy) {
-			capacity = freq * max_capacity;
-			capacity /= policy->cpuinfo.max_freq;
+			capacity = mult_frac(max_capacity, freq, policy->cpuinfo.max_freq);
+
+			/* Don't pass boost capacity to scheduler */
+ 			if (capacity > max_capacity)
+ 				capacity = max_capacity;
 		}
 	} else {
 		if (!policy)
